@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UNO Online - Sound & Avatar Edition</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- LOBBY SCREEN -->
+    <div id="lobby-screen" class="screen active">
+      <div class="glass-card">
+        <h1 class="logo">UNO<span>ONLINE</span></h1>
+        <p class="subtitle">Çok Oyunculu UNO Keyfi</p>
+        
+        <div class="avatar-selection">
+          <label>Profil Fotoğrafı Seçin</label>
+          <div class="avatar-picker" id="avatar-picker">
+            <span class="avatar-option selected" data-avatar="🐶">🐶</span>
+            <span class="avatar-option" data-avatar="🐱">🐱</span>
+            <span class="avatar-option" data-avatar="🦊">🦊</span>
+            <span class="avatar-option" data-avatar="🦁">🦁</span>
+            <span class="avatar-option" data-avatar="🐸">🐸</span>
+            <span class="avatar-option" data-avatar="panda">🐼</span>
+            <span class="avatar-option" data-avatar="🤖">🤖</span>
+            <span class="avatar-option" data-avatar="👑">👑</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label>Kullanıcı Adı</label>
+          <input type="text" id="username-input" placeholder="Oyuncu Adı..." maxlength="12">
+        </div>
+
+        <div class="lobby-actions">
+          <button id="create-btn" class="btn btn-primary">Oda Oluştur</button>
+          <div class="divider">VEYA</div>
+          <div class="join-box">
+            <input type="text" id="room-code-input" placeholder="Oda Kodu" maxlength="6">
+            <button id="join-btn" class="btn btn-secondary">Odaya Katıl</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROOM WAITING SCREEN -->
+    <div id="room-screen" class="screen">
+      <div class="glass-card wide">
+        <div class="room-header">
+          <h2>Oda Kodu: <span id="display-room-id">------</span></h2>
+          <button id="copy-code-btn" class="btn btn-small">Kopyala</button>
+        </div>
+
+        <div class="players-container">
+          <h3>Oyuncular (<span id="player-count">0</span>/10)</h3>
+          <ul id="player-list"></ul>
+        </div>
+
+        <div class="room-footer">
+          <button id="start-game-btn" class="btn btn-success hidden">Oyunu Başlat</button>
+          <p id="waiting-msg">Oda kurucusunun oyunu başlatması bekleniyor...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- GAMEPLAY SCREEN -->
+    <div id="game-screen" class="screen">
+      <div class="game-header">
+        <div class="active-color-indicator">
+          Aktif Renk: <span id="current-color-name">-</span>
+          <div id="color-circle" class="color-circle"></div>
+        </div>
+        <div id="turn-indicator" class="turn-indicator">Sıra: -</div>
+      </div>
+
+      <div id="opponents-container" class="opponents-container"></div>
+
+      <div class="play-area">
+        <div id="deck-pile" class="card-pile deck">
+          <div class="card-back">UNO</div>
+          <span class="pile-label">Kart Çek</span>
+        </div>
+
+        <div id="discard-pile" class="card-pile discard"></div>
+      </div>
+
+      <div class="action-bar">
+        <button id="uno-btn" class="btn btn-uno">UNO!</button>
+      </div>
+
+      <div class="my-profile-panel">
+        <span id="my-avatar-display" class="player-avatar-badge">🐶</span>
+        <span id="my-name-display" class="my-name">Siz</span>
+      </div>
+
+      <div class="player-hand-wrapper">
+        <div id="player-hand" class="player-hand"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLOR SELECT MODAL -->
+  <div id="color-modal" class="modal">
+    <div class="modal-content glass-card">
+      <h3>Yeni Rengi Seçin</h3>
+      <div class="color-options">
+        <button class="color-btn red" data-color="red"></button>
+        <button class="color-btn blue" data-color="blue"></button>
+        <button class="color-btn green" data-color="green"></button>
+        <button class="color-btn yellow" data-color="yellow"></button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast-container"></div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="client.js"></script>
+</body>
+</html>
