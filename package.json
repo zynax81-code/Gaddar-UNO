@@ -1,11 +1,11 @@
 {
-  "name": "uno-online",
-  "version": "1.2.0",
-  "description": "Real-time Multiplayer UNO Game with Sound Effects & Avatars",
+  "name": "gaddar-uno",
+  "version": "1.0.0",
+  "description": "Multiplayer UNO Web Game",
   "main": "server.js",
- "scripts": {
-  "start": "node server.js"
-}
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "express": "^4.18.2",
     "socket.io": "^4.7.2"
